@@ -5,9 +5,9 @@ class TasksController < ApplicationController
   before_action :is_own_task, only: [:show, :edit, :update, :destroy ]
   
   def index
-    @pagy, @tasks = pagy(Task.order(id: :desc), items: 3)
+    @pagy, @tasks = pagy(Task.order(id: :desc), items: 5)
   end
-
+ 
   def show
     @task = Task.find(params[:id])
   end

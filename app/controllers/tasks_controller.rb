@@ -2,8 +2,6 @@ class TasksController < ApplicationController
   
   before_action :require_user_logged_in
   
-  before_action :is_own_task, only: [:show, :edit, :update, :destroy ]
-  
   def index
     @pagy, @tasks = pagy(Task.order(id: :desc), items: 5)
   end
@@ -54,18 +52,9 @@ class TasksController < ApplicationController
   
   private
   
-
   # Strong Parameter
   def task_params
     params.require(:task).permit(:content, :status)
   end
   
-  
-  def is_own_task
-
-    task = current_user.tasks.find_by_id(params[:id])
-
-    return redirect_to root_path if !task
-    
-  end
 end
